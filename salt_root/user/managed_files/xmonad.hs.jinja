@@ -1,0 +1,40 @@
+import XMonad
+import XMonad.Config.Gnome
+import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Circle
+import XMonad.Layout.NoBorders
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.MultiColumns
+import XMonad.Util.EZConfig
+import XMonad.Util.Themes
+
+gutterWidth :: Int
+gutterWidth = {% if grains['host'] in ['calabash'] -%}20{%-else-%}3{%- endif %}
+
+c2 = spacing gutterWidth $ ResizableTall 1 (1/12) (1/2) []
+c3 = spacing gutterWidth $ ThreeCol 1 (1/12) (1/3)
+c4 = spacing gutterWidth $ multiCol [1] 1 (1/12) (1/3)
+cr = avoidStruts $ Circle
+tb = noBorders $ tabbed shrinkText defaultTheme
+
+myManageHooks = composeAll
+    [ className =? "Firefox" --> doFloat
+    , className =? "Vlc" --> doFloat
+    , title =? "Hangouts" --> doFloat ]
+
+main = do
+    xmonad $ gnomeConfig
+        {
+        terminal = "terminator"
+        , borderWidth = 3
+        , normalBorderColor = "#333333"
+        , focusedBorderColor = "#E36C43"
+        , modMask = mod4Mask     -- Rebind Mod to the Windows key
+        , layoutHook = avoidStruts (c2 ||| c4 ||| cr ||| tb)
+        , manageHook = (manageHook gnomeConfig) <+> myManageHooks
+        }
+        `additionalKeysP`
+        [("M-S-q", spawn "gnome-screensaver-command -l")]
