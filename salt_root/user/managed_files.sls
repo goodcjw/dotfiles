@@ -69,6 +69,41 @@
     - user: {{ grains.user }}
     - group: {{ grains.group }}
     - mode: 640
+    - template: jinja
+{{ grains.homedir }}/.local/share/fonts:
+  file.directory:
+    - user: {{ grains.user }}
+    - group: {{ grains.group }}
+    - mode: 750
+    - makedirs: True
+    - recurse:
+      - user
+      - group
+      - mode
+{{ grains.homedir }}/.local/share/fonts/TerminusTTF.ttf:
+  file.managed:
+    - source: salt://user/managed_files/terminus-ttf/TerminusTTF-4.40.1.ttf
+    - user: {{ grains.user }}
+    - group: {{ grains.group }}
+    - mode: 640
+{{ grains.homedir }}/.local/share/fonts/TerminusTTF-Bold.ttf:
+  file.managed:
+    - source: salt://user/managed_files/terminus-ttf/TerminusTTF-Bold-4.40.1.ttf
+    - user: {{ grains.user }}
+    - group: {{ grains.group }}
+    - mode: 640
+{{ grains.homedir }}/.local/share/fonts/TerminusTTF-Italic.ttf:
+  file.managed:
+    - source: salt://user/managed_files/terminus-ttf/TerminusTTF-Italic-4.40.1.ttf
+    - user: {{ grains.user }}
+    - group: {{ grains.group }}
+    - mode: 640
+{{ grains.homedir }}/.local/share/fonts/TerminusTTF-Bold Italic.ttf:
+  file.managed:
+    - source: salt://user/managed_files/terminus-ttf/TerminusTTF-Bold Italic-4.40.1.ttf
+    - user: {{ grains.user }}
+    - group: {{ grains.group }}
+    - mode: 640
 /usr/share/themes/Emacs/gtk-2.0-key/gtkrc:
   file.managed:
     - source: salt://user/managed_files/gtkrc
