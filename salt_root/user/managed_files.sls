@@ -104,6 +104,12 @@
     - user: {{ grains.user }}
     - group: {{ grains.group }}
     - mode: 640
+{{ grains.homedir }}/.chrome-remote-desktop-session:
+  file.managed:
+    - source: salt://user/managed_files/chrome-remote-desktop-session
+    - user: {{ grains.user }}
+    - group: {{ grains.group }}
+    - mode: 640
 /usr/share/themes/Emacs/gtk-2.0-key/gtkrc:
   file.managed:
     - source: salt://user/managed_files/gtkrc
