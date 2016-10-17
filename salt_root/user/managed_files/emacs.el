@@ -228,14 +228,16 @@
           (funcall separator-left face-outer 'airline-visual-inner)
           (powerline-raw (list global-mode-string " ") 'airline-visual-inner 'l)
           (funcall separator-left 'airline-visual-inner face-trans)
-          (powerline-raw '(vc-mode vc-mode) face-trans 'r)
+          (powerline-raw "%I L%l:C%c:" face-trans 'l)
+          (powerline-raw (replace-regexp-in-string
+                          "%" "%%" (format-mode-line '(-3 "%p"))) face-trans 'r)
           (funcall separator-left face-trans face-center)
           (powerline-raw "%b " face-center 'l)))
     (rhs (list
           (funcall separator-right face-center face-inner)
           (powerline-raw (list mode-name " ") face-inner 'l)
           (funcall separator-right face-inner face-outer)
-          (powerline-raw " %I L%l:C%c:%p " face-outer 'l))))
+          (powerline-raw '(vc-mode vc-mode) face-outer 'r))))
  (concat
   (powerline-render lhs)
   (powerline-fill face-center (powerline-width rhs))
