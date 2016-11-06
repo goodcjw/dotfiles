@@ -26,7 +26,9 @@
 ;; highlight white spaces
 (require 'whitespace)
 (global-whitespace-mode 1)
-(setq whitespace-style '(face trailing tabs newline tab-mark newline-mark))
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face trailing tabs newline tab-mark newline-mark
+                              lines-tail))
 (setq-default indent-tabs-mode nil)
 
 ;; default indentation rules
@@ -251,6 +253,7 @@
  ;; If there is more than one, they won't work right.
  '(magit-diff-added ((t (:inherit nil :foreground "#149914" :weight bold))))
  '(magit-diff-removed ((t (:inherit nil :foreground "#991414" :weight bold))))
+ '(whitespace-line ((t (:inherit nil :background "#bada55"))))
  '(whitespace-tab ((t (:foreground "lightgray")))))
 
 (message "======")
